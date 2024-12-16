@@ -13,7 +13,7 @@ export const register = async (req, res, next) => {
     const userExist = await User.findOne({ email });
     if(userExist) {
         return res.status(400).json({ error: "User already exists" });
-    }
+    }   
     
     const hashedPassword = await User.hashPassword(password);
 

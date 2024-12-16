@@ -1,7 +1,7 @@
 import express from "express";
 import { body } from "express-validator";
-
-import { registerCaptain } from "../controllers/captain.controller.js";
+import { registerCaptain, loginCaptain, getCaptainProfile, logoutCaptain } from "../controllers/captain.controller.js";
+import { authCaptain } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -15,4 +15,12 @@ router.post("/register", [
     body("vehicle.vehicleType").isLength({ min: 3 }).withMessage("Vehicle type must be at least 3 characters"),
 ], registerCaptain);
 
+router.post("/login", [
+    body("email").isEmail().withMessage("Email must be valid"),
+    body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
+], loginCaptain);
+
+router.get("/profile", authCaptain, getCaptainProfile);
+
+router.post("/logout", authCaptain, logoutCaptain);
 export default router;
