@@ -1,6 +1,7 @@
 import express from "express";
 import { body } from "express-validator";
-import { register, login } from "../controllers/user.controller.js";
+import { register, login, getUserProfile, logout } from "../controllers/user.controller.js";
+import { authUser } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -13,6 +14,10 @@ router.post("/register", [
 router.post("/login", [
     body("email").isEmail().withMessage("Email must be valid"),
     body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
-], login)
+], login);
+
+router.get("/profile", authUser, getUserProfile);
+
+router.post("/logout", authUser, logout);
 
 export default router;
