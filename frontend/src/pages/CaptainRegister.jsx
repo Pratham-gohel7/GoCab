@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
-const SignUpPage = () => {
-  const submitHandler = (e) => {
-    e.preventDefault();
-  }
-  
+const CaptainRegister = () => {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+    }
   return (
     <div className="flex justify-center items-center min-h-screen">
       <form onSubmit={submitHandler} className="flex flex-col gap-4 w-full max-w-md bg-white p-6 rounded-2xl shadow-md">
@@ -13,7 +17,7 @@ const SignUpPage = () => {
           {/* <span className="absolute left-0 w-4 h-4 rounded-full bg-blue-600 animate-pulse"></span> */}
           Register
         </p>
-        <p className="text-sm text-gray-600">Signup now and get full access to our app.</p>
+        <p className="text-sm text-gray-600">Welcome captain, Be a part of GoCab.</p>
 
         <div className="flex gap-4">
           <label className="relative w-full">
@@ -84,8 +88,8 @@ const SignUpPage = () => {
         </button>
 
         <p className="text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link to={"/login"} className="text-blue-600 hover:underline">
+          Already an captain?{' '}
+          <Link to={"/captain/login"} className="text-blue-600 hover:underline">
             Sign In
           </Link>
         </p>
@@ -94,4 +98,4 @@ const SignUpPage = () => {
   )
 }
 
-export default SignUpPage
+export default CaptainRegister
